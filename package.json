@@ -1,0 +1,30 @@
+{
+  "name": "@playframe/h",
+  "version": "1.0.0",
+  "description": "0.3 kB Virtual Dom Producer",
+  "main": "index.js",
+  "scripts": {
+    "build": "coffee -c -b -p README.litcoffee > index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/playframe/h.git"
+  },
+  "keywords": [
+    "fp",
+    "pf",
+    "playframe",
+    "html",
+    "h",
+    "vdom"
+  ],
+  "author": "Kiryl Yermakou <rma4ok@gmail.com>",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/playframe/h/issues"
+  },
+  "homepage": "https://github.com/playframe/h#readme",
+  "devDependencies": {
+    "coffeescript": "^2.3.2"
+  }
+}
