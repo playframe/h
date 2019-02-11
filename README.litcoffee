@@ -28,6 +28,8 @@ and plain Arrays
 
     VNODE = Symbol 'VNODE'
 
+    _registry = {}
+
 Our Virtual Node is produced from a list of arguments passed
 to `h` function. Children are passed as tail of arguments,
 but any of them could be wrapped in Array
@@ -42,13 +44,25 @@ This is compensated by a more advenced child walker used in
 [@playframe/dom](https://github.com/playframe/dom)
 
     module.exports = h = (a...)=>
-      if typeof a[0] is 'function'
+      if typeof (name = a[0]) is 'function'
+        invoke a...
+      else if component = _registry[name]
+        a[0] = component
         invoke a...
       else
         a[VNODE] = true
         a
 
+
     h.VNODE = VNODE
+
+Registering custom components like
+`h.use({'my-component': MyComponent})`
+
+    h.use = (components)=>
+      _registry[k] = v for k, v of components
+      return
+
 
 If the first argument of `h` function is a not a `'div'` but
 your Component function, we will flatten the children and attach

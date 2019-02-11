@@ -25,9 +25,11 @@
 
 // Creating a unique Symbol for distinction between Virtual Nodes
 // and plain Arrays
-var VNODE, h, invoke;
+var VNODE, _registry, h, invoke;
 
 VNODE = Symbol('VNODE');
+
+_registry = {};
 
 // Our Virtual Node is produced from a list of arguments passed
 // to `h` function. Children are passed as tail of arguments,
@@ -42,7 +44,11 @@ VNODE = Symbol('VNODE');
 // This is compensated by a more advenced child walker used in
 // [@playframe/dom](https://github.com/playframe/dom)
 module.exports = h = (...a) => {
-  if (typeof a[0] === 'function') {
+  var component, name;
+  if (typeof (name = a[0]) === 'function') {
+    return invoke(...a);
+  } else if (component = _registry[name]) {
+    a[0] = component;
     return invoke(...a);
   } else {
     a[VNODE] = true;
@@ -51,6 +57,16 @@ module.exports = h = (...a) => {
 };
 
 h.VNODE = VNODE;
+
+// Registering custom components like
+// `h.use({'my-component': MyComponent})`
+h.use = (components) => {
+  var k, v;
+  for (k in components) {
+    v = components[k];
+    _registry[k] = v;
+  }
+};
 
 // If the first argument of `h` function is a not a `'div'` but
 // your Component function, we will flatten the children and attach
