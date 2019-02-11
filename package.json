@@ -1,6 +1,6 @@
 {
   "name": "@playframe/h",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "0.3 kB Virtual Dom Producer",
   "main": "index.js",
   "scripts": {
