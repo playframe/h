@@ -40,8 +40,8 @@ h('div', {class: 's'}, child1, [ child2, child3 ], child4)`)
 To achieve no runtime overhead we will avoid creating a new object
 for Virtual Node and new Array for children. We will just mark array
 of passed arguments as a `VNODE` and return it as is.
-This is compensated by a more advenced child walker used in
-[@playframe/dom](https://github.com/playframe/dom)
+This is compensated by an advanced child walker used in
+[@playframe/shadom](https://github.com/playframe/shadom)
 
     module.exports = h = (a...)=>
       if typeof (name = a[0]) is 'function'
